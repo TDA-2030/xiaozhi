@@ -28,7 +28,7 @@ from audio_storage import AudioStorage
 
 
 # 常量定义
-ASR_TASK_SERVER_URL = os.getenv("ASR_TASK_SERVER_URL")
+ASR_TASK_SERVER_URL = os.getenv("ASR_TASK_SERVER_URL", "ws://127.0.0.1:8765")
 SAMPLE_RATE = 16000
 
 
@@ -60,7 +60,7 @@ class ModelManager:
 
 
 class AsrWorker:
-    def __init__(self, wsapp, session_id, model_manager, audio_storage):
+    def __init__(self, wsapp: websocket.WebSocketApp, session_id, model_manager: ModelManager, audio_storage: AudioStorage):
         self.wsapp = wsapp
         self.session_id = session_id
         self.model_manager = model_manager
@@ -194,7 +194,7 @@ class AsrWorker:
             return
         
         oss_prefix = os.getenv('OSS_BUCKET_URL', '')
-        oss_key = f'asr/{uuid.uuid4()}.ogg'
+        oss_key = f'asr/{uuid.uuid4()}.wav'
         message = {
             'type': 'chat',
             'session_id': self.session_id,
@@ -233,7 +233,7 @@ class AsrTaskClient:
         self.model_manager.load_models()
         self.audio_storage.start()
 
-    def get_worker(self, session_id):
+    def get_worker(self, session_id) -> AsrWorker:
         if session_id not in self.workers:
             self.workers[session_id] = AsrWorker(self.wsapp, session_id, self.model_manager, self.audio_storage)
         return self.workers[session_id]
