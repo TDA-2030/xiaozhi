@@ -1,0 +1,15 @@
+[submodule "CosyVoice"]
+	path = CosyVoice
+	url = https://github.com/FunAudioLLM/CosyVoice.git
+[submodule "Qwen2.5-Coder"]
+	path = Qwen2.5-Coder
+	url = https://github.com/QwenLM/Qwen2.5-Coder.git
+[submodule "Qwen2.5-Coder-7B-Instruct"]
+	path = Qwen2.5-Coder-7B-Instruct
+	url = https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct
+[submodule "SenseVoice"]
+	path = SenseVoice
+	url = https://github.com/FunAudioLLM/SenseVoice.git
+[submodule "xiaozhi-esp32"]
+	path = xiaozhi-esp32
+	url = https://github.com/TDA-2030/xiaozhi-esp32.git
