@@ -4,3 +4,4 @@ tmp/
 package-lock.json
 TODO.md
 *.pyc
+.vscode
